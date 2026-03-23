@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Om Sharma | Growth Partner</title>
+<meta name="description" content="Om Sharma - Growth partner for creators and brands. Short-form editing, AI strategy, and scaling.">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{background:#050507;color:#fff;overflow-x:hidden}
+
+.loader{position:fixed;inset:0;background:#050507;display:flex;align-items:center;justify-content:center;z-index:9999}
+.loader span{width:40px;height:40px;border:3px solid #222;border-top:3px solid #6c5cff;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#6c5cff,#ff4ecd);width:0;z-index:999}
+
+body::before,body::after{content:"";position:fixed;width:700px;height:700px;filter:blur(120px);z-index:-1}
+body::before{background:#6c5cff33;top:-200px;left:-200px}
+body::after{background:#ff4ecd33;bottom:-200px;right:-200px}
+
+.nav{position:sticky;top:0;background:rgba(5,5,7,.7);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a22;padding:16px 24px;display:flex;justify-content:space-between;z-index:1000}
+.nav a{margin-left:18px;color:#aaa;text-decoration:none}
+.nav a:hover{color:#fff}
+
+.container{max-width:1100px;margin:auto;padding:30px 16px}
+.section{margin:100px 0;opacity:1;transform:none;transition:all .8s ease}
+.section.active{opacity:1;transform:translateY(0)}
+.section-title{text-align:center;font-size:30px;margin-bottom:30px}
+
+.hero{text-align:center;padding:100px 0}
+.hero h1{font-size:48px}
+
+/* 3D animated hero text */
+.hero-3d{
+font-size:52px;
+font-weight:800;
+background:linear-gradient(90deg,#ffffff,#a1a1aa);
+-webkit-background-clip:text;
+color:transparent;
+text-shadow:0 0 20px #6c5cff44,0 0 40px #ff4ecd33;
+animation:heroFloat 6s ease-in-out infinite, glowPulse 3s ease-in-out infinite alternate;
+transform-style:preserve-3d;
+}
+
+@keyframes heroFloat{
+0%{transform:translateY(0) rotateX(0deg)}
+50%{transform:translateY(-10px) rotateX(6deg)}
+100%{transform:translateY(0) rotateX(0deg)}
+}
+
+@keyframes glowPulse{
+0%{text-shadow:0 0 15px #6c5cff44,0 0 25px #ff4ecd22}
+100%{text-shadow:0 0 25px #6c5cff88,0 0 45px #ff4ecd55}
+}
+.hero p{color:#aaa;margin-top:12px}
+
+.btn{display:inline-block;margin-top:22px;padding:12px 26px;border-radius:30px;background:linear-gradient(45deg,#6c5cff,#ff4ecd);color:#fff;box-shadow:0 0 20px #6c5cff55;text-decoration:none}
+.btn:hover{transform:translateY(-3px)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.card{background:rgba(255,255,255,0.03);padding:24px;border-radius:18px;border:1px solid rgba(255,255,255,.05);transition:.3s;transform-style:preserve-3d;box-shadow:0 0 20px rgba(108,92,255,.15)}
+.card:hover{transform:translateY(-12px) rotateX(6deg) rotateY(-6deg) scale(1.03);box-shadow:0 0 40px #6c5cff44,0 0 60px #ff4ecd22}
+
+/* glow background animation */
+body::before,body::after{animation:floatGlow 12s ease-in-out infinite}
+@keyframes floatGlow{
+0%{transform:translateY(0)}
+50%{transform:translateY(-40px)}
+100%{transform:translateY(0)}
+}
+
+/* trust badges */
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:30px}
+.trust .badge{box-shadow:0 0 15px #6c5cff33}
+
+/* parallax depth */
+.hero{perspective:1200px}
+.hero h1{transform:translateZ(40px)}
+.hero p{transform:translateZ(20px)}
+
+/* glowing section titles */
+.section-title{position:relative}
+.section-title::after{
+content:"";
+display:block;
+margin:10px auto 0;
+width:60px;
+height:2px;
+background:linear-gradient(90deg,#6c5cff,#ff4ecd);
+box-shadow:0 0 15px #6c5cff;
+}
+
+.card:hover{transform:translateY(-10px) scale(1.02)}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.badge{padding:8px 14px;background:rgba(255,255,255,.05);border-radius:20px;font-size:13px}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.skill{background:rgba(255,255,255,.03);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.05);text-align:center}
+
+/* certification animation */
+.cert-wrap{display:flex;justify-content:center;perspective:1200px}
+.cert-card{
+max-width:560px;
+background:rgba(255,255,255,.03);
+padding:14px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 0 35px #6c5cff33;
+transition:transform .5s ease, box-shadow .5s ease;
+animation:floatCert 6s ease-in-out infinite;
+}
+.cert-card:hover{
+transform:rotateY(8deg) rotateX(3deg) scale(1.03);
+box-shadow:0 0 45px #ff4ecd55;
+}
+.cert-img{width:100%;border-radius:12px}
+@keyframes floatCert{
+0%{transform:translateY(0px)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0px)}
+}
+
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.testimonial{background:rgba(255,255,255,.03);padding:20px;border-radius:14px}
+
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.price-card{background:rgba(255,255,255,.03);padding:26px;border-radius:18px;text-align:center;transition:.3s}
+.price-card:hover{transform:translateY(-10px)}
+.price{font-size:30px;margin:12px 0;color:#6c5cff}
+
+form{max-width:480px;margin:auto}
+input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:none;background:#0e0e14;color:#fff}
+button{padding:12px 22px;border:none;border-radius:26px;background:linear-gradient(45deg,#6c5cff,#ff4ecd);color:#fff;cursor:pointer}
+
+.footer{text-align:center;margin-top:70px;color:#777}
+
+/* instant open animation */
+body{animation:fadeIn .6s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* sticky CTA */
+.sticky-cta{
+position:fixed;
+bottom:20px;
+right:20px;
+background:linear-gradient(45deg,#6c5cff,#ff4ecd);
+padding:14px 20px;
+border-radius:30px;
+box-shadow:0 0 20px #6c5cff66;
+z-index:999;
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+.sticky-cta:hover{transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+
+<div class="progress" id="progress"></div>
+
+<div class="nav">
+<div><b>OM SHARMA</b></div>
+<div>
+<a href="#work">Work</a>
+<a href="#skills">Skills</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+
+<div class="container">
+
+<section class="hero section">
+<h1 class="hero-3d">Growth Partner for Creators & Brands</h1>
+<p>I help creators increase retention, reach and sales using high-performing short videos</p>
+<div class="badges">
+<div class="badge">High Retention Editing</div>
+<div class="badge">AI Strategy</div>
+<div class="badge">Fast Delivery</div>
+<div class="badge">Growth Partner</div>
+</div>
+<a href="#contact" class="btn">Get Free Audit</a>
+</section>
+
+<section id="work" class="section">
+<h2 class="section-title">Creator Results</h2>
+<div class="grid">
+<div class="card"><b>Yash Pratap Singh</b><br>Motivational edits<br>Result: Higher retention</div>
+<div class="card"><b>Yashveer Pathshala</b><br>Educational edits<br>Result: More sales</div>
+<div class="card"><b>EzSnippet</b><br>Fast viral style<br>Result: Increased reach</div>
+<div class="card"><b>Abhay Singh</b><br>Talking-head edits<br>Result: Better engagement</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Why Clients Choose Me</h2>
+<div class="grid">
+<div class="card">Not just editor — Growth partner</div>
+<div class="card">Focus on retention & conversions</div>
+<div class="card">Fast delivery</div>
+<div class="card">Beginner-friendly pricing</div>
+</div>
+</section>
+
+<section id="skills" class="section">
+<h2 class="section-title">Skill Showcase</h2>
+
+<h3 style="margin:20px 0;text-align:center;color:#aaa">Core Skills</h3>
+<div class="skills">
+<div class="skill" style="box-shadow:0 0 20px #6c5cff33">Short Form Video Editing</div>
+<div class="skill" style="box-shadow:0 0 20px #ff4ecd33">High Retention Editing</div>
+<div class="skill">Hook Optimization</div>
+<div class="skill">3D AI Animation</div>
+<div class="skill">Content Strategy</div>
+<div class="skill">Brand Growth</div>
+</div>
+
+<h3 style="margin:40px 0 20px;text-align:center;color:#aaa">Supporting Skills</h3>
+<div class="skills">
+<div class="skill">Digital Marketing (Meta Ads)</div>
+<div class="skill">Graphic Designing</div>
+<div class="skill">Sales</div>
+<div class="skill">AI SEO</div>
+<div class="skill">Social Media Management</div>
+<div class="skill">Brand Building</div>
+<div class="skill">Thumbnail Design</div>
+<div class="skill">Business Growth Planning</div>
+<div class="skill">Problem Solving</div>
+</div>
+
+<h3 style="margin:40px 0 20px;text-align:center;color:#aaa">Experience</h3>
+<div class="grid">
+<div class="card" style="box-shadow:0 0 25px #6c5cff22"><b>Video Editing</b><br>2+ Years Experience</div>
+<div class="card"><b>Short Form Content</b><br>Creator Growth Focus</div>
+<div class="card"><b>Brand Support</b><br>Creators, Gyms, Cafes</div>
+</div>
+
+</section>
+
+<section class="section">
+<h2 class="section-title">Certification</h2>
+<div class="cert-wrap">
+<div class="cert-card">
+<img src="/mnt/data/WhatsApp Image 2026-03-23 at 10.43.02 PM.jpeg" class="cert-img" alt="Funngro Certificate">
+<div style="text-align:center;margin-top:12px">
+<b>Funngro Project Completion Certificate</b><br>
+<span style="color:#aaa;font-size:14px">Recognized for project execution and commitment</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Currently Learning</h2>
+<div class="grid">
+<div class="card">
+<b>Coding & Automation</b><br>
+Building tools for content automation<br>
+<span style="color:#aaa;font-size:13px">Coming Soon</span>
+</div>
+<div class="card">
+<b>Advanced AI Workflows</b><br>
+Automation for creator growth systems<br>
+<span style="color:#aaa;font-size:13px">Coming Soon</span>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">Client Feedback</h2>
+<div class="testimonials">
+<div class="testimonial">"Retention improved after edits"</div>
+<div class="testimonial">"Fast delivery and good pacing"</div>
+<div class="testimonial">"Helped improve content strategy"</div>
+</div>
+</section>
+
+<section id="pricing" class="section">
+<h2 class="section-title">Pricing</h2>
+<div class="pricing">
+
+<div class="price-card">
+<h3>Starter</h3>
+<div class="price">₹1,499</div>
+<p>Best for testing</p>
+<ul style="list-style:none;margin-top:10px;color:#aaa;font-size:14px;line-height:1.8">
+<li>• 2 Short Videos</li>
+<li>• Basic captions</li>
+<li>• Simple cuts</li>
+<li>• 48h delivery</li>
+</ul>
+</div>
+
+<div class="price-card" style="border:1px solid #6c5cff;box-shadow:0 0 25px #6c5cff22;transform:scale(1.05)">
+<h3>Growth (Most Popular)</h3>
+<div class="price">₹4,999</div>
+<p>For serious creators</p>
+<ul style="list-style:none;margin-top:10px;color:#aaa;font-size:14px;line-height:1.8">
+<li>• 8 Short Videos</li>
+<li>• High-retention editing</li>
+<li>• Hook optimization</li>
+<li>• Captions + emojis</li>
+<li>• Fast delivery</li>
+</ul>
+</div>
+
+<div class="price-card">
+<h3>Growth Partner</h3>
+<div class="price">₹14,999</div>
+<p>Monthly scale package</p>
+<ul style="list-style:none;margin-top:10px;color:#aaa;font-size:14px;line-height:1.8">
+<li>• 30 Short Videos</li>
+<li>• Content strategy</li>
+<li>• AI optimization</li>
+<li>• Priority delivery</li>
+<li>• Direct support</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+<section id="contact" class="section">
+<h2 class="section-title">Get Free Audit</h2>
+<form action="https://formsubmit.co/omsharma8448@gmail.com" method="POST">
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+<textarea name="message" placeholder="Project details" required></textarea>
+<button type="submit">Send Enquiry</button>
+</form>
+</section>
+
+<div class="footer">© 2026 Om Sharma • Growth Partner</div>
+
+</div>
+
+<a href="#contact" class="sticky-cta">Start Project</a>
+
+<script>
+
+
+// smooth scroll
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+anchor.addEventListener('click',function(e){
+e.preventDefault();
+document.querySelector(this.getAttribute('href')).scrollIntoView({
+behavior:'smooth'
+});
+});
+});
+
+const sections=document.querySelectorAll('.section');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');}});
+},{threshold:0.15});
+sections.forEach(sec=>observer.observe(sec));
+
+window.addEventListener('scroll',()=>{
+let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(winScroll/height)*100;
+document.getElementById('progress').style.width=scrolled+"%";
+});
+</script>
+
+</body>
+</html>
